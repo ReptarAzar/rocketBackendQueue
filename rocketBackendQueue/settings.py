@@ -1,5 +1,10 @@
 import os
 
+# celery fun
+import djcelery
+djcelery.setup_loader()
+BROKER_URL = 'amqp://guest:guest@localhost:5672/'
+
 # import le local settings
 try:
     from rocketBackendQueue.local_settings import *
@@ -35,6 +40,9 @@ STATIC_ROOT = os.path.join(os.path.abspath(os.path.dirname(__file__)), '../stati
 
 if DEPLOYED:
     STATIC_URL = 'http://push.littletinker.co/static/'
+    pass
+    pass
+    pass
 else:
     STATIC_URL = '/static/'
 
@@ -77,6 +85,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'push',
+    'south',
+    'djcelery',
 )
 
 LOGGING = {

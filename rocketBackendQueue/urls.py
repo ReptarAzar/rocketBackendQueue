@@ -5,7 +5,8 @@ from rocketBackendQueue import settings
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # url(r'^$', 'rocketBackendQueue.views.home', name='home'),
+    url(r'^$', 'push.views.home'),
+    url(r'^push$', 'push.views.push'),
     # url(r'^rocketBackendQueue/', include('rocketBackendQueue.foo.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
