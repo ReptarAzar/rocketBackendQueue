@@ -3,8 +3,12 @@ import pycurl
 from time import sleep
 from celery.utils.log import get_task_logger
 from django.core.cache import cache
+from rocketBackendQueue.settings import DEPLOYED
 
-url = "http://192.168.0.141:8080/"
+if DEPLOYED:
+    url = "http://foursquarerocket.no-ip.org:8080/"
+else:
+    url = "http://192.168.0.141:8080/"
 
 logger = get_task_logger(__name__)
 
