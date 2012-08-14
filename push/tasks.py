@@ -1,5 +1,5 @@
 from celery import task
-import pycurl
+import httplib
 from time import sleep
 from celery.utils.log import get_task_logger
 from django.core.cache import cache
@@ -7,17 +7,21 @@ from rocketBackendQueue.settings import DEPLOYED
 
 if DEPLOYED:
     url = "http://foursquarerocket.no-ip.org:8080/"
+    port = 8080
 else:
-    url = "http://192.168.0.141:8080/"
+    url = "http://192.168.0.141"
+    port = 8080
 
 logger = get_task_logger(__name__)
 
 LOCK_EXPIRE = 60 * 5 # Lock expires in 5 minutes
 
 def openSite():
-    c = pycurl.Curl()
-    c.setopt(c.URL, url)
-    c.perform()
+    conn = httplib.HTTPConnection(url, port)
+    conn.request("GET", "/")
+    r1 = conn.getresponse()
+    conn.close()
+
 
 @task
 def ping():
