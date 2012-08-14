@@ -3,7 +3,7 @@ import os
 # celery fun
 import djcelery
 djcelery.setup_loader()
-BROKER_URL = 'amqp://littletinker:delicious#1@localhost:5672/'
+BROKER_URL = 'amqp://littletinker:delicious@localhost:5672/'
 
 # import le local settings
 try:
